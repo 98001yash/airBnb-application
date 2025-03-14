@@ -14,9 +14,9 @@ import java.time.LocalDateTime;
 @Setter
 @Table(
         uniqueConstraints = @UniqueConstraint(
-            name = "unique_hotel_room_date",
-            columnNames = {"hotel_id", "room_id", "date"}
-))
+                name = "unique_hotel_room_date",
+                columnNames = {"hotel_id", "room_id", "date"}
+        ))
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

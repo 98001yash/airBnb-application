@@ -11,22 +11,22 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface BookingService {
+
     BookingDto initialiseBooking(BookingRequest bookingRequest);
 
-    BookingDto addGuests(Long bookingId, List<Long> guestList);
-    String initialisePayments(Long bookingId);
+    BookingDto addGuests(Long bookingId, List<Long> guestIdList);
+
+    String initiatePayments(Long bookingId);
 
     void capturePayment(Event event);
 
     void cancelBooking(Long bookingId);
 
-    BookingStatus getBookingStatus(Long bookingId);
-    List<BookingDto> getAllBookingByHotelId(Long hotelId);
+    BookingDto getBookingById(Long bookingId);
 
-    HotelReportDto getHotelReport(Long hotelId, LocalDateTime startDate, LocalDateTime endDate);
+    List<BookingDto> getAllBookingsByHotelId(Long hotelId);
 
     HotelReportDto getHotelReport(Long hotelId, LocalDate startDate, LocalDate endDate);
 
-    List<BookingDto> getBookings();
-
+    List<BookingDto> getMyBookings();
 }

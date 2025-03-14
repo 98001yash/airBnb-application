@@ -12,3 +12,4 @@ public class UpdateInventoryRequestDto {
     private BigDecimal surgeFactor;
     private Boolean closed;
 }
+

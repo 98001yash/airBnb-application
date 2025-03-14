@@ -7,11 +7,11 @@ import com.company.projects.airBnbApp.dto.HotelInfoRequestDto;
 import java.util.List;
 
 public interface HotelService {
-
     HotelDto createNewHotel(HotelDto hotelDto);
 
     HotelDto getHotelById(Long id);
-    HotelDto updateHotelById(Long id,HotelDto hotelDto);
+
+    HotelDto updateHotelById(Long id, HotelDto hotelDto);
 
     void deleteHotelById(Long id);
 
@@ -21,3 +21,4 @@ public interface HotelService {
 
     List<HotelDto> getAllHotels();
 }
+

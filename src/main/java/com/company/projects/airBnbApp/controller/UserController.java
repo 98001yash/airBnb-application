@@ -26,47 +26,49 @@ public class UserController {
     private final GuestService guestService;
 
     @PatchMapping("/profile")
-    @Operation(summary = "Update the user profile",tags = {"Profile"})
-    public ResponseEntity<Void> updateProfile(@RequestBody ProfileUpdateRequestDto profileUpdateRequestDto){
+    @Operation(summary = "Update the user profile", tags = {"Profile"})
+    public ResponseEntity<Void> updateProfile(@RequestBody ProfileUpdateRequestDto profileUpdateRequestDto) {
         userService.updateProfile(profileUpdateRequestDto);
+
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/myBookings")
-    @Operation(summary = "Get all my previous bookings ",tags = {"Profile"})
-    public ResponseEntity<List<BookingDto>> getMyBookings(){
-        return ResponseEntity.ok(bookingService.getBookings());
+    @Operation(summary = "Get all my previous bookings", tags = {"Profile"})
+    public ResponseEntity<List<BookingDto>> getMyBookings() {
+        return ResponseEntity.ok(bookingService.getMyBookings());
     }
 
     @GetMapping("/profile")
-    @Operation(summary = "Get all Profile",tags = {"Profile"})
-    public ResponseEntity<UserDto> getMyProfile(){
+    @Operation(summary = "Get my Profile", tags = {"Profile"})
+    public ResponseEntity<UserDto> getMyProfile() {
         return ResponseEntity.ok(userService.getMyProfile());
     }
 
     @GetMapping("/guests")
-    @Operation(summary = "Get all my guests",tags = {"Booking Guests"})
-    public ResponseEntity<List<GuestDto>> getAllGuests(){
+    @Operation(summary = "Get all my guests", tags = {"Booking Guests"})
+    public ResponseEntity<List<GuestDto>> getAllGuests() {
         return ResponseEntity.ok(guestService.getAllGuests());
     }
 
     @PostMapping("/guests")
-    @Operation(summary = "Add a new guest to my guest list",tags = {"Booking Guests"})
-    public ResponseEntity<GuestDto> addNewGuest(@RequestBody GuestDto guestDto){
+    @Operation(summary = "Add a new guest to my guests list", tags = {"Booking Guests"})
+    public ResponseEntity<GuestDto> addNewGuest(@RequestBody GuestDto guestDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(guestService.addNewGuest(guestDto));
     }
 
-    @PutMapping("guest/{guestId}")
-    @Operation(summary = "Update a guest",tags = {"Booking Guests"})
-    public ResponseEntity<Void> updateGuest(@PathVariable Long guestId, @RequestBody GuestDto guestDto){
-        guestService.updateGuest(guestId,guestDto);
+    @PutMapping("guests/{guestId}")
+    @Operation(summary = "Update a guest", tags = {"Booking Guests"})
+    public ResponseEntity<Void> updateGuest(@PathVariable Long guestId, @RequestBody GuestDto guestDto) {
+        guestService.updateGuest(guestId, guestDto);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("guests/{guestId}")
-    @Operation(summary = "Remove a guest",tags = {"Booking Guests"})
-    public ResponseEntity<Void> deleteGuest(@PathVariable Long guestId){
+    @Operation(summary = "Remove a guest", tags = {"Booking Guests"})
+    public ResponseEntity<Void> deleteGuest(@PathVariable Long guestId) {
         guestService.deleteGuest(guestId);
         return ResponseEntity.noContent().build();
     }
+
 }

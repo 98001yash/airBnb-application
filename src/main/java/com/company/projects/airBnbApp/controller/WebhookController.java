@@ -21,7 +21,6 @@ public class WebhookController {
     @Value("${stripe.webhook.secret}")
     private String endpointSecret;
 
-
     @PostMapping("/payment")
     @Operation(summary = "Capture the payments", tags = {"Webhook"})
     public ResponseEntity<Void> capturePayments(@RequestBody String payload, @RequestHeader("Stripe-Signature") String sigHeader) {
@@ -34,3 +33,4 @@ public class WebhookController {
         }
     }
 }
+

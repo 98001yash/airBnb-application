@@ -17,3 +17,4 @@ public class HotelPriceResponseDto {
     private HotelContactInfo contactInfo;
     private Double price;
 }
+

@@ -16,7 +16,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import static com.company.projects.airBnbApp.AppUtils.getCurrentUser;
+import static com.company.projects.airBnbApp.utils.AppUtils.getCurrentUser;
 
 
 @Service
@@ -27,33 +27,31 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
 
-
     @Override
     public User getUserById(Long id) {
-        return userRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("User not found with id: "+id));
+        return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found with id: "+id));
     }
 
     @Override
     public void updateProfile(ProfileUpdateRequestDto profileUpdateRequestDto) {
-
         User user = getCurrentUser();
 
-        if(profileUpdateRequestDto.getDateOfBirth()!=null) user.setDateOfBirth(profileUpdateRequestDto.getDateOfBirth());
-        if(profileUpdateRequestDto.getGender()!=null) user.setGender(profileUpdateRequestDto.getGender());
-        if(profileUpdateRequestDto.getName()!=null) user.setName(profileUpdateRequestDto.getName());
+        if(profileUpdateRequestDto.getDateOfBirth() != null) user.setDateOfBirth(profileUpdateRequestDto.getDateOfBirth());
+        if(profileUpdateRequestDto.getGender() != null) user.setGender(profileUpdateRequestDto.getGender());
+        if (profileUpdateRequestDto.getName() != null) user.setName(profileUpdateRequestDto.getName());
 
         userRepository.save(user);
     }
 
     @Override
     public UserDto getMyProfile() {
-       User user = getCurrentUser();
-       log.info("Getting the profile for user with ID: {}",user.getId());
-       return modelMapper.map(user,UserDto.class);
+        User user = getCurrentUser();
+        log.info("Getting the profile for user with id: {}", user.getId());
+        return modelMapper.map(user, UserDto.class);
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByEmail(username).orElse(null);
+        return userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + username));
     }
 }

@@ -1,6 +1,7 @@
 package com.company.projects.airBnbApp.advice;
 
-import com.codingshuttle.projects.airBnbApp.exception.ResourceNotFoundException;
+
+import com.company.projects.airBnbApp.exception.ResourceNotFoundException;
 import io.jsonwebtoken.JwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

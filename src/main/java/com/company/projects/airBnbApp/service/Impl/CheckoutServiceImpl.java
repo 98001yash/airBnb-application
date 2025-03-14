@@ -20,15 +20,14 @@ import java.math.BigDecimal;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class CheckoutServiceImpl implements CheckoutService {
+public class CheckoutServiceImpl implements CheckoutService{
 
     private final BookingRepository bookingRepository;
 
-
     @Override
     public String getCheckoutSession(Booking booking, String successUrl, String failureUrl) {
-      log.info("Creating session for booking with ID: {}",booking.getId());
-      User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        log.info("Creating session for booking with ID: {}", booking.getId());
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         try {
             CustomerCreateParams customerParams = CustomerCreateParams.builder()
